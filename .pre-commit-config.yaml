@@ -1,17 +1,40 @@
 repos:
   # Code formatting
   - repo: https://github.com/psf/black
-    rev: 23.12.0
+    rev: 26.3.1
     hooks:
       - id: black
         language_version: python3.12
 
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
+      # Check yaml files
       - id: check-yaml
+
+      # Check file size
       - id: check-added-large-files
+
+      # Check python syntax validation
+      - id: check-ast
+
+      # Prevent commiting unresolved merge confliccts
       - id: check-merge-conflict
+
+      # Ensure files end with a newline
+      - id: end-of-file-fixer
+
+      # Remove trailing whitespace
+      - id: trailing-whitespace
+
+      # Prevent commiting .env files
+      - id: forbid-new-submodules
+      - id: detect-private-key
+
+  # Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.20.2
+    hooks:
+      - id: mypy
+        additional_dependencies: [pandas]

@@ -4,8 +4,7 @@ import pandas as pd
 
 def init_db(conn: sqlite3.Connection) -> None:
     """Create the transactions table if it doesn't exist."""
-    conn.execute(
-        """
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             date        TEXT    NOT NULL,
@@ -15,8 +14,7 @@ def init_db(conn: sqlite3.Connection) -> None:
             source      TEXT,
             UNIQUE(date, description, amount)
         )
-    """
-    )
+    """)
     conn.commit()
 
 

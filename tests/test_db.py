@@ -1,7 +1,6 @@
 from src.db import insert_transactions, get_all_transactions, get_monthly_summary
 import pandas as pd
 
-
 SAMPLE_ROWS = [
     {
         "date": "2026-03-01",
