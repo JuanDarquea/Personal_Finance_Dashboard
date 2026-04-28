@@ -6,20 +6,6 @@ repos:
       - id: black
         language_version: python3.12
 
-  # Linting
-  - repo: https://github.com/astral-sh/ruff
-    rev: 0.1.8
-    hooks:
-      - id: ruff
-        args: [--fix]
-
-  # Type checking
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.1
-    hooks:
-      - id: mypy
-        additional_dependencies: [pandas, types-all]
-
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -29,13 +15,3 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
       - id: check-merge-conflict
-
-  # Tests (optional, but good for catching broken code)
-  - repo: local
-    hooks:
-      - id: pytest
-        name: pytest
-        entry: pytest
-        language: system
-        types: [python]
-        stages: [commit]

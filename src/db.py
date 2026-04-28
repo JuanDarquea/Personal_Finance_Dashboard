@@ -4,7 +4,8 @@ import pandas as pd
 
 def init_db(conn: sqlite3.Connection) -> None:
     """Create the transactions table if it doesn't exist."""
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS transactions (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             date        TEXT    NOT NULL,
@@ -14,7 +15,8 @@ def init_db(conn: sqlite3.Connection) -> None:
             source      TEXT,
             UNIQUE(date, description, amount)
         )
-    """)
+    """
+    )
     conn.commit()
 
 
@@ -26,7 +28,13 @@ def insert_transactions(conn: sqlite3.Connection, rows: list[dict]) -> int:
         try:
             cursor.execute(
                 "INSERT INTO transactions (date, description, amount, category, source) VALUES (?, ?, ?, ?, ?)",
-                (row["date"], row["description"], row["amount"], row["category"], row.get("source", "")),
+                (
+                    row["date"],
+                    row["description"],
+                    row["amount"],
+                    row["category"],
+                    row.get("source", ""),
+                ),
             )
             inserted += 1
         except sqlite3.IntegrityError:

@@ -23,7 +23,9 @@ def ingest_csv(conn: sqlite3.Connection, csv_path: Path, source: str = "") -> in
     df["date"] = pd.to_datetime(df["date"]).dt.strftime("%Y-%m-%d")
 
     # Normalize amount to float
-    df["amount"] = pd.to_numeric(df["amount"].astype(str).str.replace(",", ""), errors="coerce")
+    df["amount"] = pd.to_numeric(
+        df["amount"].astype(str).str.replace(",", ""), errors="coerce"
+    )
     df = df.dropna(subset=["amount"])
 
     source_name = source or Path(csv_path).stem
